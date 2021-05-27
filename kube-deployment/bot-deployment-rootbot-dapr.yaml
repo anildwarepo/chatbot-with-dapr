@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simplerootbot-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simplerootbot-app
+  template:
+    metadata:
+      labels:
+        app: simplerootbot-app
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "simplerootbotapp"
+        dapr.io/app-port: "3978"
+    spec:
+      containers:
+      - name: simplerootbot-app
+        image: quay.io/anildwarepo/rootbot:1.0
+        imagePullPolicy: Always
+        ports:
+        - name: api
+          containerPort: 3978

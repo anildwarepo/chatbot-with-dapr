@@ -1,0 +1,32 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rootbot
+  labels:
+    app: simplerootbot-app
+spec:
+  selector:
+    app: simplerootbot-app
+  ports:
+  - name: api
+    port: 30001
+    targetPort: 3500
+    nodePort: 30001
+  type: NodePort
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: echoskillbot
+  labels:
+    app: echoskillbot-app
+spec:
+  selector:
+    app: echoskillbot-app
+  ports:
+  - name: api
+    port: 30002
+    targetPort: 3500
+    nodePort: 30002
+  type: NodePort
+

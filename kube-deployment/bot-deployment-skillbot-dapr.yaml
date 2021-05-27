@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echoskillbot-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echoskillbot-app
+  template:
+    metadata:
+      labels:
+        app: echoskillbot-app
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "echoskillbotapp"
+        dapr.io/app-port: "39783"
+    spec:
+      containers:
+      - name: echoskillbot-app
+        image: quay.io/anildwarepo/echoskillbot:1.0
+        imagePullPolicy: Always
+        ports:
+        - name: api
+          containerPort: 39783
